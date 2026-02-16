@@ -1,3 +1,4 @@
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -13,15 +14,16 @@ body {
 
 /* CARD */
 .card {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   padding: 35px;
   margin: 60px auto;
   border-radius: 24px;
   max-width: 700px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
   position: relative;
   z-index: 2;
   text-align: center;
+  animation: popUp 0.6s ease;
 }
 
 .card h2 {
@@ -38,16 +40,15 @@ button {
   color: white;
   font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 button:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
   background: #ff3d87;
 }
 
-
-/* HEARTS */
+/* HEART BACKGROUND */
 .hearts {
   position: fixed;
   inset: 0;
@@ -56,7 +57,7 @@ button:hover {
 }
 
 .hearts span {
-  position: fixed;
+  position: absolute;
   bottom: -40px;
   animation: heartFloat linear forwards;
 }
@@ -69,23 +70,56 @@ button:hover {
   animation: float 12s ease-in forwards;
 }
 
-/* ANIMATIONS */
-@keyframes heartFloat {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-110vh); opacity: 0; }
+/* GAME BOX (for click or falling words) */
+#gameBox {
+  position: relative;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 20px;
 }
 
-@keyframes float {
-  0% { opacity: 0; }
-  20% { opacity: 1; }
-  100% { transform: translateY(-110vh); opacity: 0; }
+/* CLICK HEART GAME */
+.click-heart {
+  position: absolute;
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-@keyframes popUp {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+.click-heart:hover {
+  transform: scale(1.2);
 }
 
+/* FALLING WORD GAME */
+.falling-word {
+  position: absolute;
+  top: 0;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 6px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.falling-word:hover {
+  transform: scale(1.1);
+}
+
+/* SCORE */
+#gameScore,
+#scoreDisplay {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  font-weight: 600;
+  color: #ff4d94;
+}
+
+/* HEART BREAK DIVIDER */
 .heart-break {
   text-align: center;
   font-size: 1.2rem;
@@ -94,84 +128,39 @@ button:hover {
   color: #ff5e9c;
 }
 
-.game-btn {
-  margin: 10px;
-  font-size: 1.2rem;
-  cursor: pointer;
+/* ANIMATIONS */
+@keyframes heartFloat {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
 }
 
-
-#gameBox {
-  position: relative;
-  height: 300px;
-  background: rgba(255,255,255,0.5);
-  border-radius: 20px;
-  overflow: hidden;
+@keyframes float {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
 }
 
-.click-heart {
-  position: absolute;
-  font-size: 30px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.click-heart:hover {
-  transform: scale(1.2);
-}
-#gameScore {
-  font-size: 1.2rem;
-  margin-top: 10px;
-  font-weight: 600;
-  color: #ff4d94;
-}
-
-.choice-box {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 120px;
-  margin: 15px;
-  font-size: 40px;
-  background: #ffe0f0;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.choice-box:hover {
-  background: #ffb3d9;
-  transform: scale(1.1);
-}
-
-#catchGameArea {
-  position: relative;
-  width: 320px;
-  height: 300px;
-  margin: 20px auto;
-  background: #fff0f6;
-  border-radius: 15px;
-  overflow: hidden;
-}
-
-.falling-word {
-  position: absolute;
-  top: 0;
-  font-size: 1rem;
-  background: white;
-  padding: 6px 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: 0.2s ease;
-  white-space: nowrap;
-}
-
-.falling-word:hover {
-  transform: scale(1.1);
-}
-
-#scoreDisplay {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+@keyframes popUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
