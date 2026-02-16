@@ -200,14 +200,14 @@ function unlockMainContent() {
   document.getElementById("gameArea").style.display = "none";
   document.getElementById("mainContent").style.display = "block";
 
- const music = document.getElementById("birthdayMusic");
+  const music = document.getElementById("birthdayMusic");
   music.volume = 0.5;
   music.play();
-}
 
   confetti({
     particleCount: 200,
     spread: 120
   });
 }
+
 
