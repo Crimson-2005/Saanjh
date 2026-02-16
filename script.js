@@ -38,6 +38,10 @@ let heartScore = 0;
 let heartInterval;
 
 function startHeartGame() {
+   const music = document.getElementById("birthdayMusic");
+  music.volume = 0.5;
+  music.play();
+  
   document.getElementById("gameIntro").style.display = "none";
   document.getElementById("gameArea").style.display = "block";
 
@@ -199,15 +203,11 @@ function startBoxGame() {
 function unlockMainContent() {
   document.getElementById("gameArea").style.display = "none";
   document.getElementById("mainContent").style.display = "block";
-
-  const music = document.getElementById("birthdayMusic");
-  music.volume = 0.5;
-  music.play();
-
   confetti({
     particleCount: 200,
     spread: 120
   });
 }
+
 
 
