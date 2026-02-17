@@ -12,7 +12,7 @@ body {
   overflow-y: auto;
 }
 
-/* CARD */
+/* CARD BASE */
 .card {
   background: rgba(255, 255, 255, 0.92);
   padding: 35px;
@@ -128,7 +128,7 @@ button:hover {
   color: #ff5e9c;
 }
 
-/* CHOICE BOX (FIXED – OUTSIDE ANIMATION) */
+/* CHOICE BOX */
 .choice-box {
   display: inline-flex;
   align-items: center;
@@ -148,6 +148,20 @@ button:hover {
   transform: scale(1.1);
 }
 
+/* POST-GAME CARDS SCROLL REVEAL */
+#mainContent {
+  display: none;        /* initially hidden */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+#mainContent.visible {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
 #mainContent .card {
   opacity: 0;
   transform: translateY(40px);
@@ -159,71 +173,19 @@ button:hover {
   transform: translateY(0);
 }
 
-
-/* Hide whole section until games finish */
-#mainContent {
-  display: none;        /* initially hidden */
-  opacity: 0;           /* start fully transparent */
-  pointer-events: none; /* prevent interaction until visible */
-  transition: opacity 1s ease; /* smooth fade-in */
-}
-
-#mainContent.visible {
-  display: block;       /* show the container */
-  opacity: 1;           /* fade-in */
-  pointer-events: auto; /* allow interaction */
-}
-
-/* Scroll reveal effect for cards */
-.card {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.card.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-
 /* ANIMATIONS */
 @keyframes heartFloat {
-  from {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-110vh);
-    opacity: 0;
-  }
+  from { transform: translateY(0); opacity: 1; }
+  to   { transform: translateY(-110vh); opacity: 0; }
 }
 
 @keyframes float {
-  0% {
-    opacity: 0;
-    transform: translateY(0);
-  }
-  20% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-110vh);
-    opacity: 0;
-  }
+  0% { opacity: 0; transform: translateY(0); }
+  20% { opacity: 1; }
+  100% { transform: translateY(-110vh); opacity: 0; }
 }
 
 @keyframes popUp {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
 }
-
-
-
