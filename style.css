@@ -162,15 +162,30 @@ button:hover {
 
 /* Hide whole section until games finish */
 #mainContent {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s ease;
+  display: none;        /* initially hidden */
+  opacity: 0;           /* start fully transparent */
+  pointer-events: none; /* prevent interaction until visible */
+  transition: opacity 1s ease; /* smooth fade-in */
 }
 
 #mainContent.visible {
-  opacity: 1;
-  pointer-events: auto;
+  display: block;       /* show the container */
+  opacity: 1;           /* fade-in */
+  pointer-events: auto; /* allow interaction */
 }
+
+/* Scroll reveal effect for cards */
+.card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 
 /* ANIMATIONS */
@@ -209,4 +224,5 @@ button:hover {
     transform: scale(1);
   }
 }
+
 
