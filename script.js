@@ -1,8 +1,10 @@
+// Initialize AOS animations
 AOS.init({
   duration: 800,
   once: true
 });
 
+// Confetti on page load
 window.onload = function() {
   confetti({
     particleCount: 150,
@@ -11,59 +13,47 @@ window.onload = function() {
   });
 };
 
+// Global references
 const heartContainer = document.querySelector('.hearts');
 const balloonArea = document.getElementById('balloons');
 
-setInterval(() => {
-  // HEART
-  const heart = document.createElement('span');
-  heart.textContent = '💖';
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.fontSize = Math.random() * 10 + 15 + 'px';
-  heart.style.animationDuration = Math.random() * 3 + 4 + 's';
-  heartContainer.appendChild(heart);
-  setTimeout(() => heart.remove(), 7000);
-
-  // BALLOON
-  const b = document.createElement('span');
-  b.textContent = '🎈';
-  b.style.left = Math.random() * 100 + 'vw';
-  b.style.fontSize = Math.random() * 30 + 30 + 'px';
-  balloonArea.appendChild(b);
-  setTimeout(() => b.remove(), 13000);
-
-}, 500);
-
 let heartScore = 0;
 let heartInterval;
+let balloonInterval;
 
+// ======== START GAME ========
 function startHeartGame() {
   const music = document.getElementById("birthdayMusic");
   music.volume = 0.5;
   music.play();
-  
+
+  // Hide intro card and show game area
   document.getElementById("gameIntro").style.display = "none";
-  document.getElementById("gameArea").style.display = "block";
+  const gameAreaCard = document.getElementById("gameArea");
+  gameAreaCard.style.display = "block";
 
   document.getElementById("gameTitle").innerText = "Game 1: Catch 7 Hearts 💖";
   document.getElementById("gameMessage").innerText = "";
 
   heartScore = 0;
-
   const box = document.getElementById("gameBox");
   box.innerHTML = `<div id="gameScore">Score: 0 / 7</div>`;
 
+  // Start spawning hearts
   clearInterval(heartInterval);
   heartInterval = setInterval(spawnHeart, 900);
+
+  // Start floating hearts and balloons in background
+  clearInterval(balloonInterval);
+  balloonInterval = setInterval(spawnFloatingEffects, 500);
 }
 
+// ======== HEART SPAWN ========
 function spawnHeart() {
   const box = document.getElementById("gameBox");
-
   const heart = document.createElement("span");
   heart.innerText = "💖";
   heart.classList.add("click-heart");
-
   heart.style.left = Math.random() * 85 + "%";
   heart.style.top = Math.random() * 75 + "%";
 
@@ -71,7 +61,6 @@ function spawnHeart() {
     heart.remove();
     heartScore++;
     document.getElementById("gameScore").innerText = "Score: " + heartScore + " / 7";
-
     if (heartScore >= 7) {
       clearInterval(heartInterval);
       setTimeout(() => startBalloonGame(), 600);
@@ -82,6 +71,7 @@ function spawnHeart() {
   setTimeout(() => heart.remove(), 3000);
 }
 
+// ======== BALLOON GAME ========
 function startBalloonGame() {
   document.getElementById("gameTitle").innerText = "Game 2: Find the Lucky Balloon 🎈";
   document.getElementById("gameBox").innerHTML = "";
@@ -103,6 +93,7 @@ function startBalloonGame() {
   }
 }
 
+// ======== FALLING WORD GAME ========
 function startBoxGame() {
   document.getElementById("gameTitle").innerText = "Game 3: Catch the Compliments 💖";
   const box = document.getElementById("gameBox");
@@ -112,8 +103,8 @@ function startBoxGame() {
   let score = 0;
   let gameActive = true;
 
-  const goodWords = [" Cutie Patootie 🫧" , "Pure Soul 💗", "Gulabo 💐", "Bestie 🫶", "Choco Puff 🍫","Paglu 😜"];
-  const badWords = ["Drama Frog 🐸", "Sleepy Potato 🥔", "Ziddi Zombie 🧟", "Bhootni 💀", "Naagin🐍","Chipkali🦎"];
+  const goodWords = ["Cutie Patootie 🫧", "Pure Soul 💗", "Gulabo 💐", "Bestie 🫶", "Choco Puff 🍫", "Paglu 😜"];
+  const badWords = ["Drama Frog 🐸", "Sleepy Potato 🥔", "Ziddi Zombie 🧟", "Bhootni 💀", "Naagin 🐍", "Chipkali 🦎"];
 
   const scoreDisplay = document.createElement("div");
   scoreDisplay.id = "scoreDisplay";
@@ -166,19 +157,41 @@ function startBoxGame() {
 
   setInterval(createFallingWord, 1000);
 }
+
+// ======== FLOATING HEARTS & BALLOONS ========
+function spawnFloatingEffects() {
+  // HEART
+  const heart = document.createElement('span');
+  heart.textContent = '💖';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+  heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+  heartContainer.appendChild(heart);
+  setTimeout(() => heart.remove(), 7000);
+
+  // BALLOON
+  const b = document.createElement('span');
+  b.textContent = '🎈';
+  b.style.left = Math.random() * 100 + 'vw';
+  b.style.fontSize = Math.random() * 30 + 30 + 'px';
+  balloonArea.appendChild(b);
+  setTimeout(() => b.remove(), 13000);
+}
+
+// ======== POST-GAME CONTENT ========
 function unlockMainContent() {
   const mainContent = document.getElementById("mainContent");
   const gameAreaCard = document.getElementById("gameArea");
   const gameIntroCard = document.getElementById("gameIntro");
 
-  // Hide the game completely
+  // Hide the games completely
   if (gameAreaCard) gameAreaCard.style.display = "none";
   if (gameIntroCard) gameIntroCard.style.display = "none";
 
-  // Reveal the post-game content
+  // Reveal post-game content
   mainContent.style.display = "block";  
   setTimeout(() => {
-    mainContent.style.opacity = "1"; // fade-in container
+    mainContent.style.opacity = "1";
     mainContent.style.pointerEvents = "auto";
   }, 100);
 
@@ -194,6 +207,3 @@ function unlockMainContent() {
   );
   cards.forEach((card) => observer.observe(card));
 }
-
-
-
