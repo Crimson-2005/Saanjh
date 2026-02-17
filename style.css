@@ -12,7 +12,6 @@ body {
   background-attachment: fixed; 
   background-size: cover;
   transition: background 1s ease; 
- color: #ff5e7a;
   animation: sunset 20s infinite alternate;
   font-family: 'Poppins', sans-serif; 
 }
@@ -202,6 +201,7 @@ button:hover {
   50% { background: linear-gradient(to bottom, #fbc2eb, #a18cd1, #ff9a9e); }
   100% { background: linear-gradient(to bottom, #ff9a9e, #fad0c4, #fbc2eb); }
 }
+
 
 
 
