@@ -202,29 +202,32 @@ function startBoxGame() {
 
 function unlockMainContent() {
   const mainContent = document.getElementById("mainContent");
-  
-  // Show the mainContent container
-  mainContent.style.opacity = "0";
-  mainContent.style.display = "block";
-  mainContent.style.transition = "opacity 1s ease";
-  
+  mainContent.style.display = "block"; // show container
+  mainContent.style.opacity = "0";     // start hidden
+
   setTimeout(() => {
+    mainContent.style.transition = "opacity 1s ease";
     mainContent.style.opacity = "1";
-  }, 100); // tiny delay to trigger transition
+  }, 100); // tiny delay to trigger fade-in
 
-  // Then reveal cards on scroll
+  // Reveal cards one by one
   const cards = mainContent.querySelectorAll(".card");
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      }
-    });
-  }, { threshold: 0.2 });
+  cards.forEach((card, index) => {
+    card.style.opacity = 0;
+    card.style.transform = "translateY(40px)";
+    setTimeout(() => {
+      card.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+      card.style.opacity = 1;
+      card.style.transform = "translateY(0)";
+    }, 400 * index); // stagger each card by 0.4s
+  });
 
-  cards.forEach(card => observer.observe(card));
+  // Optional: enable pointer events after everything is visible
+  setTimeout(() => {
+    mainContent.style.pointerEvents = "auto";
+  }, 400 * cards.length + 500);
 }
+
 
 
 
