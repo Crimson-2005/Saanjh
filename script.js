@@ -38,7 +38,7 @@ let heartScore = 0;
 let heartInterval;
 
 function startHeartGame() {
-   const music = document.getElementById("birthdayMusic");
+  const music = document.getElementById("birthdayMusic");
   music.volume = 0.5;
   music.play();
   
@@ -51,9 +51,7 @@ function startHeartGame() {
   heartScore = 0;
 
   const box = document.getElementById("gameBox");
-  box.innerHTML = `
-    <div id="gameScore">Score: 0 / 7</div>
-  `;
+  box.innerHTML = `<div id="gameScore">Score: 0 / 7</div>`;
 
   clearInterval(heartInterval);
   heartInterval = setInterval(spawnHeart, 900);
@@ -72,25 +70,17 @@ function spawnHeart() {
   heart.onclick = function () {
     heart.remove();
     heartScore++;
-
-    document.getElementById("gameScore").innerText =
-      "Score: " + heartScore + " / 7";
+    document.getElementById("gameScore").innerText = "Score: " + heartScore + " / 7";
 
     if (heartScore >= 7) {
       clearInterval(heartInterval);
-      setTimeout(() => {
-        startBalloonGame();
-      }, 600);
+      setTimeout(() => startBalloonGame(), 600);
     }
   };
 
   box.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 3000);
+  setTimeout(() => heart.remove(), 3000);
 }
-
 
 function startBalloonGame() {
   document.getElementById("gameTitle").innerText = "Game 2: Find the Lucky Balloon 🎈";
@@ -105,11 +95,8 @@ function startBalloonGame() {
     balloon.innerText = "🎈";
 
     balloon.onclick = function () {
-      if (i === lucky) {
-        startBoxGame();
-      } else {
-        document.getElementById("gameMessage").innerText = "Oops 😜 Try Again!";
-      }
+      if (i === lucky) startBoxGame();
+      else document.getElementById("gameMessage").innerText = "Oops 😜 Try Again!";
     };
 
     document.getElementById("gameBox").appendChild(balloon);
@@ -117,13 +104,10 @@ function startBalloonGame() {
 }
 
 function startBoxGame() {
-  document.getElementById("gameTitle").innerText =
-    "Game 3: Catch the Compliments 💖";
-
+  document.getElementById("gameTitle").innerText = "Game 3: Catch the Compliments 💖";
   const box = document.getElementById("gameBox");
   box.innerHTML = "";
-  document.getElementById("gameMessage").innerText =
-    "Good words click karo! Wrong pe mat click karna 😌";
+  document.getElementById("gameMessage").innerText = "Good words click karo! Wrong pe mat click karna 😌";
 
   let score = 0;
   let gameActive = true;
@@ -153,35 +137,21 @@ function startBoxGame() {
       : badWords[Math.floor(Math.random() * badWords.length)];
 
     word.dataset.good = isGood;
-
     word.style.left = Math.random() * 280 + "px";
     gameArea.appendChild(word);
 
     let topPosition = 0;
-
     const fallInterval = setInterval(() => {
-      if (!gameActive) {
-        clearInterval(fallInterval);
-        return;
-      }
-
+      if (!gameActive) { clearInterval(fallInterval); return; }
       topPosition += 0.5;
       word.style.top = topPosition + "px";
-
-      if (topPosition > 260) {
-        word.remove();
-        clearInterval(fallInterval);
-      }
+      if (topPosition > 260) { word.remove(); clearInterval(fallInterval); }
     }, 30);
 
     word.onclick = function () {
       if (!gameActive) return;
-
-      if (word.dataset.good === "true") {
-        score++;
-      } else {
-        score = Math.max(0, score - 1);
-      }
+      if (word.dataset.good === "true") score++;
+      else score = Math.max(0, score - 1);
 
       scoreDisplay.innerText = "Score: " + score;
       word.remove();
@@ -189,9 +159,7 @@ function startBoxGame() {
 
       if (score >= 10) {
         gameActive = false;
-        setTimeout(() => {
-          unlockMainContent();
-        }, 800);
+        setTimeout(() => unlockMainContent(), 800);
       }
     };
   }
@@ -199,37 +167,23 @@ function startBoxGame() {
   setInterval(createFallingWord, 1000);
 }
 
-
 function unlockMainContent() {
   const mainContent = document.getElementById("mainContent");
-
-  // Reveal the container after games finish
-  mainContent.style.display = "block";  
+  mainContent.style.display = "block";
   setTimeout(() => {
-    mainContent.style.opacity = "1"; // fade-in container
+    mainContent.style.opacity = "1";
     mainContent.style.pointerEvents = "auto";
   }, 100);
 
-  // Set up scroll reveal for cards
   const cards = mainContent.querySelectorAll(".card");
-
   const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show"); // triggers your CSS transition
-        }
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
       });
     },
     { threshold: 0.2 }
   );
 
-  cards.forEach((card) => observer.observe(card));
+  cards.forEach(card => observer.observe(card));
 }
-
-
-
-
-
-
-
