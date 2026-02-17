@@ -112,7 +112,7 @@ function startBoxGame() {
   let score = 0;
   let gameActive = true;
 
-  const goodWords = [" Cutie Patootie 🫧" "Pure Soul 💗", "Gulabo 💐", "Bestie 🫶", "Choco Puff 🍫","Paglu 😜"];
+  const goodWords = [" Cutie Patootie 🫧" , "Pure Soul 💗", "Gulabo 💐", "Bestie 🫶", "Choco Puff 🍫","Paglu 😜"];
   const badWords = ["Drama Frog 🐸", "Sleepy Potato 🥔", "Ziddi Zombie 🧟", "Bhootni 💀", "Naagin🐍","Chipkali🦎"];
 
   const scoreDisplay = document.createElement("div");
@@ -194,5 +194,6 @@ function unlockMainContent() {
   );
   cards.forEach((card) => observer.observe(card));
 }
+
 
 
