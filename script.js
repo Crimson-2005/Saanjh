@@ -201,13 +201,31 @@ function startBoxGame() {
 
 
 function unlockMainContent() {
-  document.getElementById("gameArea").style.display = "none";
-  document.getElementById("mainContent").style.display = "block";
-  confetti({
-    particleCount: 200,
-    spread: 120
-  });
+  const mainContent = document.getElementById("mainContent");
+  
+  // Show the mainContent container
+  mainContent.style.opacity = "0";
+  mainContent.style.display = "block";
+  mainContent.style.transition = "opacity 1s ease";
+  
+  setTimeout(() => {
+    mainContent.style.opacity = "1";
+  }, 100); // tiny delay to trigger transition
+
+  // Then reveal cards on scroll
+  const cards = mainContent.querySelectorAll(".card");
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  cards.forEach(card => observer.observe(card));
 }
+
 
 
 
