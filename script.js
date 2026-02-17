@@ -165,7 +165,7 @@ function startBoxGame() {
         return;
       }
 
-      topPosition += 2;
+      topPosition += 0.5;
       word.style.top = topPosition + "px";
 
       if (topPosition > 260) {
@@ -208,6 +208,7 @@ function unlockMainContent() {
     spread: 120
   });
 }
+
 
 
 
