@@ -169,21 +169,31 @@ function startBoxGame() {
 
 function unlockMainContent() {
   const mainContent = document.getElementById("mainContent");
-  mainContent.style.display = "block";
+  const gameAreaCard = document.getElementById("gameArea"); // the whole game card
+
+  // Hide the game completely
+  gameAreaCard.style.display = "none";
+
+  // Reveal the post-game content
+  mainContent.style.display = "block";  
   setTimeout(() => {
-    mainContent.style.opacity = "1";
+    mainContent.style.opacity = "1"; // fade-in container
     mainContent.style.pointerEvents = "auto";
   }, 100);
 
+  // Set up scroll reveal for cards
   const cards = mainContent.querySelectorAll(".card");
+
   const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("show");
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show"); // triggers CSS transition
+        }
       });
     },
     { threshold: 0.2 }
   );
 
-  cards.forEach(card => observer.observe(card));
+  cards.forEach((card) => observer.observe(card));
 }
