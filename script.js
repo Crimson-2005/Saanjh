@@ -166,13 +166,14 @@ function startBoxGame() {
 
   setInterval(createFallingWord, 1000);
 }
-
 function unlockMainContent() {
   const mainContent = document.getElementById("mainContent");
-  const gameAreaCard = document.getElementById("gameArea"); // the whole game card
+  const gameAreaCard = document.getElementById("gameArea");
+  const gameIntroCard = document.getElementById("gameIntro");
 
   // Hide the game completely
-  gameAreaCard.style.display = "none";
+  if (gameAreaCard) gameAreaCard.style.display = "none";
+  if (gameIntroCard) gameIntroCard.style.display = "none";
 
   // Reveal the post-game content
   mainContent.style.display = "block";  
@@ -181,19 +182,16 @@ function unlockMainContent() {
     mainContent.style.pointerEvents = "auto";
   }, 100);
 
-  // Set up scroll reveal for cards
+  // Scroll reveal for post-game cards
   const cards = mainContent.querySelectorAll(".card");
-
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show"); // triggers CSS transition
-        }
+        if (entry.isIntersecting) entry.target.classList.add("show");
       });
     },
     { threshold: 0.2 }
   );
-
   cards.forEach((card) => observer.observe(card));
 }
+
