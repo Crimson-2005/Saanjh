@@ -150,7 +150,7 @@ button:hover {
 
 /* POST-GAME CARDS SCROLL REVEAL */
 #mainContent {
-  display: none;        /* initially hidden */
+  display: none;        /* hide until games finish */
   opacity: 0;
   pointer-events: none;
   transition: opacity 1s ease;
