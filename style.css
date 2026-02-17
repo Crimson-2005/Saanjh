@@ -148,17 +148,17 @@ button:hover {
   transform: scale(1.1);
 }
 
-/* SCROLL REVEAL EFFECT */
-.card {
+#mainContent .card {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.card.show {
+#mainContent .card.show {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 /* Hide whole section until games finish */
 #mainContent {
@@ -224,5 +224,6 @@ button:hover {
     transform: scale(1);
   }
 }
+
 
 
