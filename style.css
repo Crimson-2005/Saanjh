@@ -163,4 +163,25 @@ button:hover {
     opacity: 1;
     transform: scale(1);
   }
+
+  .choice-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  margin: 15px;
+  font-size: 40px;
+  background: #ffe0f0;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
+
+.choice-box:hover {
+  background: #ffb3d9;
+  transform: scale(1.1);
+}
+
+}
+
