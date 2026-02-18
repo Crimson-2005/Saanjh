@@ -180,6 +180,12 @@ button:hover {
   opacity: 1;
   transform: translateY(0);
 }
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 
 /* ANIMATIONS */
 @keyframes heartFloat {
@@ -203,3 +209,4 @@ button:hover {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
