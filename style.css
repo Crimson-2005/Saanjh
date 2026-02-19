@@ -186,6 +186,23 @@ button:hover {
   display: block;
 }
 
+.bts-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.bts-gallery img {
+  width: 200px;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.bts-gallery img:hover {
+  transform: scale(1.05);
+}
 
 /* ANIMATIONS */
 @keyframes heartFloat {
@@ -209,4 +226,5 @@ button:hover {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
 
